@@ -48,3 +48,18 @@ def kmeans_clustering(data, k=3):
     kmeans = KMeans(n_clusters=k, random_state=42)
     labels = kmeans.fit_predict(data)
     return labels
+
+
+def bootstrap_sampling(data, n_samples=1000):
+    """
+    Generates bootstrap samples and returns confidence intervals.
+    """
+    means = [np.mean(np.random.choice(data, size=len(data), replace=True)) for _ in range(n_samples)]
+    return {'mean': np.mean(means), '95% CI': (np.percentile(means, 2.5), np.percentile(means, 97.5))}
+
+def t_test(data1, data2):
+    """
+    Performs an independent t-test to compare two datasets.
+    """
+    stat, p = stats.ttest_ind(data1, data2)
+    return {'t-statistic': stat, 'p-value': p, 'significant': p < 0.05}
