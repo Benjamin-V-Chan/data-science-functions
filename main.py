@@ -80,3 +80,13 @@ def monte_carlo_simulation(func, n_simulations=10000):
     """
     results = [func() for _ in range(n_simulations)]
     return {'mean': np.mean(results), 'variance': np.var(results), '95% CI': (np.percentile(results, 2.5), np.percentile(results, 97.5))}
+
+
+def exponential_smoothing(data, alpha=0.2):
+    """
+    Applies exponential smoothing to a time series dataset.
+    """
+    smoothed = [data[0]]  # First value remains the same
+    for t in range(1, len(data)):
+        smoothed.append(alpha * data[t] + (1 - alpha) * smoothed[t-1])
+    return np.array(smoothed)
