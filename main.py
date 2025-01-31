@@ -63,3 +63,20 @@ def t_test(data1, data2):
     """
     stat, p = stats.ttest_ind(data1, data2)
     return {'t-statistic': stat, 'p-value': p, 'significant': p < 0.05}
+
+
+def principal_component_analysis(data, n_components=2):
+    """
+    Performs PCA on a dataset and returns transformed data.
+    """
+    from sklearn.decomposition import PCA
+    pca = PCA(n_components=n_components)
+    transformed_data = pca.fit_transform(data)
+    return transformed_data, pca.explained_variance_ratio_
+
+def monte_carlo_simulation(func, n_simulations=10000):
+    """
+    Runs a Monte Carlo simulation for a given function.
+    """
+    results = [func() for _ in range(n_simulations)]
+    return {'mean': np.mean(results), 'variance': np.var(results), '95% CI': (np.percentile(results, 2.5), np.percentile(results, 97.5))}
