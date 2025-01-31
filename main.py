@@ -18,3 +18,17 @@ def descriptive_statistics(data):
         'skewness': stats.skew(data),
         'kurtosis': stats.kurtosis(data)
     }
+
+def correlation_matrix(df):
+    """
+    Returns the correlation matrix of a DataFrame.
+    """
+    return df.corr()
+
+def normality_test(data):
+    """
+    Performs the Shapiro-Wilk test for normality.
+    """
+    stat, p = stats.shapiro(data)
+    return {'Shapiro-Wilk Statistic': stat, 'p-value': p, 'normal': p > 0.05}
+
