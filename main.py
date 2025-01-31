@@ -32,3 +32,19 @@ def normality_test(data):
     stat, p = stats.shapiro(data)
     return {'Shapiro-Wilk Statistic': stat, 'p-value': p, 'normal': p > 0.05}
 
+
+def linear_regression(X, y):
+    """
+    Fits a simple linear regression model and returns coefficients.
+    """
+    model = LinearRegression()
+    model.fit(X.reshape(-1, 1), y)
+    return {'slope': model.coef_[0], 'intercept': model.intercept_}
+
+def kmeans_clustering(data, k=3):
+    """
+    Performs K-Means clustering on a dataset and returns cluster labels.
+    """
+    kmeans = KMeans(n_clusters=k, random_state=42)
+    labels = kmeans.fit_predict(data)
+    return labels
